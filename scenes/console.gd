@@ -11,6 +11,13 @@ func toggleFrame(show : bool):
 
 func loadSprite(file, pos : Vector2, id : int):
 	$screen.loadSprite(file, pos, id)
+	
+func createLine(id: int,startPoint : Vector2, endPoint : Vector2):
+	$screen.createLine(id,startPoint,endPoint)
+	
+func moveLine(id,x,y):
+	print("Console: Moving Line " + str(id))
+	$screen.moveLine(id,x,y)
 
 func moveLayer(id,x,y):
 	print("Console: Moving " + str(id))
@@ -18,3 +25,6 @@ func moveLayer(id,x,y):
 
 func deleteLayer(id):
 	$screen.deleteLayer(id)
+
+func deleteLine(id):
+	$screen.deleteLine(id)

@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://di54drxmhgtvw"]
 
 [ext_resource type="Script" path="res://scenes/console.gd" id="1_4md1m"]
-[ext_resource type="PackedScene" uid="uid://bc1dq1558vmi5" path="res://scenes/screen.tcsn.tscn" id="2_xeo4m"]
+[ext_resource type="PackedScene" uid="uid://bc1dq1558vmi5" path="res://scenes/screen.tscn" id="2_omsqs"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i06kc"]
 bg_color = Color(1, 0.768627, 0.176471, 1)
@@ -47,7 +47,7 @@ offset_right = 430.0
 offset_bottom = 270.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_iotaa")
 
-[node name="screen" parent="." instance=ExtResource("2_xeo4m")]
+[node name="screen" parent="." instance=ExtResource("2_omsqs")]
 custom_minimum_size = Vector2(400, 240)
 layout_mode = 0
 anchors_preset = 0

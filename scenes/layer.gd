@@ -11,9 +11,8 @@ var fileName : String = ""
 var xPos : int
 var yPos : int
 
-signal xPosSet
-signal yPosSet
-signal closeLayer
+signal posSet
+signal deleteLayer
 
 func set_ID(id : int):
 	ID = id
@@ -41,7 +40,7 @@ func setXPos(input):
 	xPos = number
 	xPosEdit.text = str(number)
 	xPosSlider.value = number
-	xPosSet.emit(ID,xPos,yPos)
+	posSet.emit(ID,xPos,yPos)
 
 func setYPos(input):
 	#Check validity
@@ -62,8 +61,8 @@ func setYPos(input):
 	yPos = number
 	yPosEdit.text = str(number)
 	yPosSlider.value = number
-	yPosSet.emit(ID,xPos,yPos)
+	posSet.emit(ID,xPos,yPos)
 
 func _on_x_button_pressed():
-	closeLayer.emit(ID)
+	deleteLayer.emit(ID)
 	self.queue_free()

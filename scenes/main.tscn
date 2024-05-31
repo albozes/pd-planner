@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://dphkacs0de0x1"]
+[gd_scene load_steps=5 format=3 uid="uid://dphkacs0de0x1"]
 
 [ext_resource type="PackedScene" uid="uid://di54drxmhgtvw" path="res://scenes/console.tscn" id="1_g3eqt"]
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_y1aws"]
 [ext_resource type="PackedScene" uid="uid://c28rwcg8i5b86" path="res://scenes/layer.tscn" id="3_p3wdq"]
+[ext_resource type="PackedScene" uid="uid://ciupgv0lgyibr" path="res://scenes/lineLayer.tscn" id="4_8xwiv"]
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -68,21 +69,6 @@ theme_override_font_sizes/font_size = 35
 button_pressed = true
 text = "Toggle Console Frame"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="toolBox/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_constants/separation = 35
-
-[node name="cursorPosTitle" type="Label" parent="toolBox/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 35
-text = "Cursor Position:"
-
-[node name="cursorPosLabel" type="Label" parent="toolBox/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 35
-text = "400,240"
-horizontal_alignment = 2
-
 [node name="HBoxContainer2" type="HBoxContainer" parent="toolBox/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 35
@@ -104,14 +90,69 @@ tick_count = 5
 [node name="HSeparator" type="HSeparator" parent="toolBox/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="layersLabel" type="Label" parent="toolBox/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer3" type="HBoxContainer" parent="toolBox/MarginContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="layersLabel" type="Label" parent="toolBox/MarginContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 25
 text = "LAYERS"
 
-[node name="Layer" parent="toolBox/MarginContainer/VBoxContainer" instance=ExtResource("3_p3wdq")]
+[node name="addSpritesButton" type="Button" parent="toolBox/MarginContainer/VBoxContainer/HBoxContainer3"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Add Sprites"
+
+[node name="createLineButton" type="Button" parent="toolBox/MarginContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Create Line"
+
+[node name="demoLayer" parent="toolBox/MarginContainer/VBoxContainer" instance=ExtResource("3_p3wdq")]
+layout_mode = 2
+
+[node name="demoLine" parent="toolBox/MarginContainer/VBoxContainer" instance=ExtResource("4_8xwiv")]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="toolBox/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HSeparator2" type="HSeparator" parent="toolBox/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="toolBox/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 35
+
+[node name="cursorPosTitle" type="Label" parent="toolBox/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 35
+text = "Cursor Position:"
+
+[node name="cursorPosLabel" type="Label" parent="toolBox/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 35
+text = "400,240"
+horizontal_alignment = 2
+
+[node name="FileDialog" type="FileDialog" parent="."]
+mode = 2
+title = "Import Image File(s)"
+initial_position = 2
+size = Vector2i(700, 800)
+visible = true
+ok_button_text = "Open"
+mode_overrides_title = false
+file_mode = 1
+access = 2
 
 [connection signal="toggled" from="toolBox/MarginContainer/VBoxContainer/frameToggle" to="." method="_on_frame_toggle_toggled"]
 [connection signal="drag_ended" from="toolBox/MarginContainer/VBoxContainer/HBoxContainer2/lineWidthSlider" to="." method="_on_line_width_slider_drag_ended"]
 [connection signal="value_changed" from="toolBox/MarginContainer/VBoxContainer/HBoxContainer2/lineWidthSlider" to="." method="_on_line_width_slider_value_changed"]
+[connection signal="pressed" from="toolBox/MarginContainer/VBoxContainer/HBoxContainer3/addSpritesButton" to="." method="_on_add_sprites_button_pressed"]
+[connection signal="pressed" from="toolBox/MarginContainer/VBoxContainer/HBoxContainer3/createLineButton" to="." method="createLine"]
+[connection signal="file_selected" from="FileDialog" to="." method="filesDropped"]
+[connection signal="files_selected" from="FileDialog" to="." method="filesDropped"]

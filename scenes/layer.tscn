@@ -16,9 +16,12 @@ size_flags_vertical = 4
 script = ExtResource("1_5s3xu")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_constants/separation = 20
 
 [node name="fileNameLabel" type="Label" parent="HBoxContainer"]
@@ -27,6 +30,10 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 18
 text = "image.png"
 vertical_alignment = 1
+
+[node name="Control" type="Control" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
@@ -45,8 +52,9 @@ vertical_alignment = 1
 [node name="xPosEdit" type="LineEdit" parent="HBoxContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
-text = "15"
 placeholder_text = "15"
+alignment = 1
+max_length = 3
 
 [node name="CenterContainer" type="CenterContainer" parent="HBoxContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
@@ -71,8 +79,9 @@ vertical_alignment = 1
 [node name="yPosEdit" type="LineEdit" parent="HBoxContainer/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
-text = "15"
 placeholder_text = "15"
+alignment = 1
+max_length = 3
 
 [node name="CenterContainer" type="CenterContainer" parent="HBoxContainer/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
