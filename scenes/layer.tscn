@@ -1,0 +1,95 @@
+[gd_scene load_steps=2 format=3 uid="uid://c28rwcg8i5b86"]
+
+[ext_resource type="Script" path="res://scenes/layer.gd" id="1_5s3xu"]
+
+[node name="Layer" type="Control"]
+custom_minimum_size = Vector2(2.08165e-12, 60)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -1020.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+script = ExtResource("1_5s3xu")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/separation = 20
+
+[node name="fileNameLabel" type="Label" parent="HBoxContainer"]
+custom_minimum_size = Vector2(200, 2.08165e-12)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "image.png"
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="xLabel" type="Label" parent="HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_font_sizes/font_size = 25
+text = "x"
+vertical_alignment = 1
+
+[node name="xPosEdit" type="LineEdit" parent="HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "15"
+placeholder_text = "15"
+
+[node name="CenterContainer" type="CenterContainer" parent="HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="xPosSlider" type="HSlider" parent="HBoxContainer/VBoxContainer/HBoxContainer/CenterContainer"]
+custom_minimum_size = Vector2(200, 2.08165e-12)
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 400.0
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="yLabel" type="Label" parent="HBoxContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 1, 0, 1)
+theme_override_font_sizes/font_size = 25
+text = "y"
+vertical_alignment = 1
+
+[node name="yPosEdit" type="LineEdit" parent="HBoxContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "15"
+placeholder_text = "15"
+
+[node name="CenterContainer" type="CenterContainer" parent="HBoxContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+
+[node name="yPosSlider" type="HSlider" parent="HBoxContainer/VBoxContainer/HBoxContainer2/CenterContainer"]
+custom_minimum_size = Vector2(200, 2.08165e-12)
+layout_mode = 2
+max_value = 240.0
+
+[node name="xButton" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_vertical = 4
+text = "X"
+
+[connection signal="text_submitted" from="HBoxContainer/VBoxContainer/HBoxContainer/xPosEdit" to="." method="setXPos"]
+[connection signal="value_changed" from="HBoxContainer/VBoxContainer/HBoxContainer/CenterContainer/xPosSlider" to="." method="setXPos"]
+[connection signal="text_submitted" from="HBoxContainer/VBoxContainer/HBoxContainer2/yPosEdit" to="." method="setYPos"]
+[connection signal="value_changed" from="HBoxContainer/VBoxContainer/HBoxContainer2/CenterContainer/yPosSlider" to="." method="setYPos"]
+[connection signal="pressed" from="HBoxContainer/xButton" to="." method="_on_x_button_pressed"]

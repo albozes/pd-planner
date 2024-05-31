@@ -1,0 +1,51 @@
+[gd_scene load_steps=7 format=3 uid="uid://bc1dq1558vmi5"]
+
+[ext_resource type="Script" path="res://scenes/screen.gd" id="1_ovffw"]
+[ext_resource type="Shader" path="res://dither.gdshader" id="2_5dqjr"]
+[ext_resource type="Shader" path="res://threshold.gdshader" id="2_aicnx"]
+[ext_resource type="PackedScene" uid="uid://k1i4fs3pu2g1" path="res://scenes/sprite.tscn" id="2_ytj2e"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u5w0a"]
+shader = ExtResource("2_5dqjr")
+shader_parameter/screen_resolution = Vector2(400, 240)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mr64w"]
+shader = ExtResource("2_aicnx")
+shader_parameter/color_1 = Vector4(0, 0, 0, 1)
+shader_parameter/color_2 = Vector4(0.5, 0.5, 0.5, 1)
+
+[node name="Screen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1520.0
+offset_bottom = -840.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ovffw")
+
+[node name="BGRect" type="ColorRect" parent="."]
+clip_children = 2
+custom_minimum_size = Vector2(400, 240)
+layout_mode = 1
+offset_right = 400.0
+offset_bottom = 240.0
+
+[node name="Sprite2D" parent="." instance=ExtResource("2_ytj2e")]
+visible = false
+
+[node name="Dither" type="ColorRect" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_u5w0a")
+layout_mode = 0
+offset_right = 400.0
+offset_bottom = 240.0
+
+[node name="Threshold" type="ColorRect" parent="."]
+z_index = 1
+z_as_relative = false
+material = SubResource("ShaderMaterial_mr64w")
+layout_mode = 0
+offset_right = 400.0
+offset_bottom = 240.0

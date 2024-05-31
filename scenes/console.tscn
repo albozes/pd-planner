@@ -1,0 +1,61 @@
+[gd_scene load_steps=5 format=3 uid="uid://di54drxmhgtvw"]
+
+[ext_resource type="Script" path="res://scenes/console.gd" id="1_4md1m"]
+[ext_resource type="PackedScene" uid="uid://bc1dq1558vmi5" path="res://scenes/screen.tcsn.tscn" id="2_xeo4m"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i06kc"]
+bg_color = Color(1, 0.768627, 0.176471, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iotaa"]
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="console" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1480.0
+offset_bottom = -800.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+script = ExtResource("1_4md1m")
+
+[node name="yellowFrame" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_i06kc")
+
+[node name="blackFrame" type="Panel" parent="."]
+layout_mode = 1
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 430.0
+offset_bottom = 270.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_iotaa")
+
+[node name="screen" parent="." instance=ExtResource("2_xeo4m")]
+custom_minimum_size = Vector2(400, 240)
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 420.0
+offset_bottom = 260.0
+grow_horizontal = 1
+grow_vertical = 1

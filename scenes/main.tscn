@@ -1,0 +1,117 @@
+[gd_scene load_steps=4 format=3 uid="uid://dphkacs0de0x1"]
+
+[ext_resource type="PackedScene" uid="uid://di54drxmhgtvw" path="res://scenes/console.tscn" id="1_g3eqt"]
+[ext_resource type="Script" path="res://scenes/main.gd" id="1_y1aws"]
+[ext_resource type="PackedScene" uid="uid://c28rwcg8i5b86" path="res://scenes/layer.tscn" id="3_p3wdq"]
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_y1aws")
+
+[node name="BG" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(1920, 1080)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="console" parent="." instance=ExtResource("1_g3eqt")]
+layout_mode = 1
+offset_left = 76.0
+offset_top = 231.0
+offset_right = -1404.0
+offset_bottom = -569.0
+scale = Vector2(2, 2)
+
+[node name="toolBox" type="Panel" parent="."]
+layout_mode = 2
+offset_left = 1220.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="toolBox"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 35
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="toolBox/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 25
+
+[node name="settingsLabel" type="Label" parent="toolBox/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "SETTINGS"
+
+[node name="frameToggle" type="CheckButton" parent="toolBox/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 35
+button_pressed = true
+text = "Toggle Console Frame"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="toolBox/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 35
+
+[node name="cursorPosTitle" type="Label" parent="toolBox/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 35
+text = "Cursor Position:"
+
+[node name="cursorPosLabel" type="Label" parent="toolBox/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 35
+text = "400,240"
+horizontal_alignment = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="toolBox/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 35
+
+[node name="lineWidthTitle" type="Label" parent="toolBox/MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 35
+text = "Crosshair Line Width"
+
+[node name="lineWidthSlider" type="HSlider" parent="toolBox/MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = 1.0
+max_value = 15.0
+value = 2.0
+tick_count = 5
+
+[node name="HSeparator" type="HSeparator" parent="toolBox/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="layersLabel" type="Label" parent="toolBox/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "LAYERS"
+
+[node name="Layer" parent="toolBox/MarginContainer/VBoxContainer" instance=ExtResource("3_p3wdq")]
+layout_mode = 2
+
+[connection signal="toggled" from="toolBox/MarginContainer/VBoxContainer/frameToggle" to="." method="_on_frame_toggle_toggled"]
+[connection signal="drag_ended" from="toolBox/MarginContainer/VBoxContainer/HBoxContainer2/lineWidthSlider" to="." method="_on_line_width_slider_drag_ended"]
+[connection signal="value_changed" from="toolBox/MarginContainer/VBoxContainer/HBoxContainer2/lineWidthSlider" to="." method="_on_line_width_slider_value_changed"]
