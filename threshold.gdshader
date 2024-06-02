@@ -1,30 +1,16 @@
-
 shader_type canvas_item;
 
-uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_linear_mipmap;
-
-uniform vec4 color_1 = vec4(.0, .0, .0, 1.0);
-uniform vec4 color_2 = vec4(0.5, 0.5, 0.5, 1.0);
+uniform sampler2D screen_texture : hint_screen_texture, repeat_disable, filter_nearest;
+uniform float threshold : hint_range(0.0, 1.0) = 0.5; // Adjustable threshold value
 
 void fragment() {
+    vec4 tex_color = texture(screen_texture, SCREEN_UV);
+    float gray = dot(tex_color.rgb, vec3(0.299, 0.587, 0.114)); // Convert to grayscale
+    float bw = gray > threshold ? 1.0 : 0.0; // Apply threshold
 
-	vec4 colors[2] = {color_1, color_2};
-	float min_diff = -1.0;
-	vec4 min_color = vec4(0.0, 0.0, 0.0, 1.0);
+    vec3 lightColor = vec3(178.0/255.0, 174.0/255.0, 167.0/255.0); // Hex #b2aea7
+    vec3 darkColor = vec3(49.0/255.0, 48.0/255.0, 39.0/255.0); // Hex #313027
 
-	vec2 uv = SCREEN_UV;
-
-	vec4 temp = textureLod(SCREEN_TEXTURE, uv, 0.0);
-
-	min_diff = 1000.0;
-	for (int i = 0; i < colors.length(); i++) {
-
-		float curr_dist = distance(colors[i], temp);
-		if (curr_dist < min_diff) {
-			min_diff = curr_dist;
-			min_color = colors[i];
-		}
-	}
-
-	COLOR.rgb = min_color.rgb;
+    vec3 finalColor = mix(darkColor, lightColor, bw); // Mix based on the threshold result
+    COLOR = vec4(finalColor, tex_color.a); // Set color to the mixed color and preserve alpha
 }

@@ -1,0 +1,6 @@
+[gd_resource type="Theme" format=3 uid="uid://cmi0hfgatqxeb"]
+
+[resource]
+CheckButton/font_sizes/font_size = 18
+Label/font_sizes/font_size = 18
+LineEdit/constants/minimum_character_width = 3

@@ -1,50 +1,54 @@
-[gd_scene load_steps=7 format=3 uid="uid://bc1dq1558vmi5"]
+[gd_scene load_steps=6 format=3 uid="uid://bc1dq1558vmi5"]
 
 [ext_resource type="Script" path="res://scenes/screen.gd" id="1_tyyul"]
 [ext_resource type="PackedScene" uid="uid://k1i4fs3pu2g1" path="res://scenes/sprite.tscn" id="2_vkdn1"]
-[ext_resource type="Shader" path="res://dither.gdshader" id="3_v77kf"]
+[ext_resource type="PackedScene" uid="uid://60ogc8f80xxu" path="res://scenes/text.tscn" id="3_d08ds"]
 [ext_resource type="Shader" path="res://threshold.gdshader" id="4_7pgbi"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_u5w0a"]
-shader = ExtResource("3_v77kf")
-shader_parameter/screen_resolution = Vector2(400, 240)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mr64w"]
 shader = ExtResource("4_7pgbi")
-shader_parameter/color_1 = Vector4(0, 0, 0, 1)
-shader_parameter/color_2 = Vector4(0.5, 0.5, 0.5, 1)
+shader_parameter/threshold = 0.5
 
 [node name="Screen" type="Control"]
+clip_contents = true
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = -1520.0
-offset_bottom = -840.0
+anchor_right = 0.347
+anchor_bottom = 0.37
+offset_right = 0.255997
+offset_bottom = 0.239997
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("1_tyyul")
 
 [node name="BGRect" type="ColorRect" parent="."]
 clip_children = 2
 custom_minimum_size = Vector2(400, 240)
 layout_mode = 1
-offset_right = 400.0
-offset_bottom = 240.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="Sprite2D" parent="." instance=ExtResource("2_vkdn1")]
+[node name="DemoSprite2D" parent="." instance=ExtResource("2_vkdn1")]
 visible = false
 
-[node name="Dither" type="ColorRect" parent="."]
+[node name="DemoText" parent="." instance=ExtResource("3_d08ds")]
 visible = false
-material = SubResource("ShaderMaterial_u5w0a")
 layout_mode = 0
-offset_right = 400.0
-offset_bottom = 240.0
+offset_left = 115.0
+offset_top = 48.0
+offset_right = 367.0
+offset_bottom = 73.0
 
 [node name="Threshold" type="ColorRect" parent="."]
 z_as_relative = false
 material = SubResource("ShaderMaterial_mr64w")
-layout_mode = 0
-offset_right = 400.0
-offset_bottom = 240.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2

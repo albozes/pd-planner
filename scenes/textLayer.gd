@@ -23,6 +23,7 @@ func ready():
 
 func set_ID(id : int):
 	ID = id
+	set_fileName(fileNameLabel.text + " " + str(ID))
 
 func set_fileName(n : String):
 	fileName = n

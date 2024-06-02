@@ -15,15 +15,22 @@ var fileName : String = ""
 var startPoint : Vector2
 var endPoint : Vector2
 
+var sliderLength : int = 50
+
 signal linePointSet
-signal deleteLine
+signal delete
+
+func ready():
+	var sliders = [startPointXSlider, startPointYSlider, endPointXSlider, endPointYSlider]
+	for s in sliders:
+		s.custom_minimum_size.x = sliderLength
 
 func set_ID(id : int):
 	ID = id
-	fileNameLabel.text += " " + str(ID)
+	set_fileName(fileNameLabel.text + " " + str(ID))
 
-func set_fileName(name : String):
-	fileName = name
+func set_fileName(n : String):
+	fileName = n
 	fileNameLabel.text = fileName
 
 func setStartPointX(xInput):
@@ -63,5 +70,5 @@ func setEndPoint(input : Vector2):
 	linePointSet.emit(ID,startPoint,endPoint)
 
 func _on_x_button_pressed():
-	deleteLine.emit(ID)
+	delete.emit(ID)
 	self.queue_free()

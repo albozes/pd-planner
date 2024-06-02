@@ -19,43 +19,50 @@ corner_radius_bottom_left = 10
 
 [node name="console" type="Control"]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = -1480.0
-offset_bottom = -800.0
+anchor_right = 0.347
+anchor_bottom = 0.37
+offset_right = 0.255997
+offset_bottom = 0.239997
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 8
-size_flags_vertical = 8
+mouse_filter = 2
 script = ExtResource("1_4md1m")
 
 [node name="yellowFrame" type="Panel" parent="."]
+custom_minimum_size = Vector2(440, 260)
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -220.0
+offset_top = -140.0
+offset_right = 220.0
+offset_bottom = 140.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_i06kc")
 
 [node name="blackFrame" type="Panel" parent="."]
 layout_mode = 1
-offset_left = 10.0
-offset_top = 10.0
-offset_right = 430.0
-offset_bottom = 270.0
+anchors_preset = -1
+anchor_left = -0.027
+anchor_top = -0.045
+anchor_right = 1.023
+anchor_bottom = 1.039
+offset_left = 0.8
+offset_top = 0.8
+offset_right = 0.799999
+offset_bottom = 0.639992
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_iotaa")
 
 [node name="screen" parent="." instance=ExtResource("2_omsqs")]
 custom_minimum_size = Vector2(400, 240)
-layout_mode = 0
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_left = 20.0
-offset_top = 20.0
-offset_right = 420.0
-offset_bottom = 260.0
-grow_horizontal = 1
-grow_vertical = 1
+layout_mode = 1
+anchor_right = 1.0
+anchor_bottom = 0.998
+offset_right = 0.0
+offset_bottom = -0.520006

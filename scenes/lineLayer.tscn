@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://ciupgv0lgyibr"]
+[gd_scene load_steps=3 format=3 uid="uid://ciupgv0lgyibr"]
 
 [ext_resource type="Script" path="res://scenes/lineLayer.gd" id="1_4njhg"]
+[ext_resource type="Theme" uid="uid://cmi0hfgatqxeb" path="res://theme.tres" id="1_jjvqd"]
 
 [node name="LineLayer" type="Control"]
 custom_minimum_size = Vector2(2.08165e-12, 115)
@@ -13,6 +14,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
+theme = ExtResource("1_jjvqd")
 script = ExtResource("1_4njhg")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
@@ -25,6 +27,7 @@ grow_vertical = 2
 theme_override_constants/separation = 20
 
 [node name="fileNameLabel" type="Label" parent="HBoxContainer"]
+custom_minimum_size = Vector2(80, 2.08165e-12)
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
 text = "Line"
@@ -52,7 +55,6 @@ theme_override_constants/separation = 15
 [node name="xLabel" type="Label" parent="HBoxContainer/startPointContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0, 0, 1)
-theme_override_font_sizes/font_size = 25
 text = "x"
 vertical_alignment = 1
 
@@ -62,12 +64,13 @@ theme_override_font_sizes/font_size = 18
 placeholder_text = "15"
 alignment = 1
 max_length = 3
+select_all_on_focus = true
 
 [node name="CenterContainer" type="CenterContainer" parent="HBoxContainer/startPointContainer/HBoxContainer"]
 layout_mode = 2
 
 [node name="startPointXSlider" type="HSlider" parent="HBoxContainer/startPointContainer/HBoxContainer/CenterContainer"]
-custom_minimum_size = Vector2(100, 2.08165e-12)
+custom_minimum_size = Vector2(50, 2.08165e-12)
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 400.0
@@ -79,7 +82,6 @@ theme_override_constants/separation = 15
 [node name="yLabel" type="Label" parent="HBoxContainer/startPointContainer/HBoxContainer2"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 1, 0, 1)
-theme_override_font_sizes/font_size = 25
 text = "y"
 vertical_alignment = 1
 
@@ -89,12 +91,13 @@ theme_override_font_sizes/font_size = 18
 placeholder_text = "15"
 alignment = 1
 max_length = 3
+select_all_on_focus = true
 
 [node name="CenterContainer" type="CenterContainer" parent="HBoxContainer/startPointContainer/HBoxContainer2"]
 layout_mode = 2
 
 [node name="startPointYSlider" type="HSlider" parent="HBoxContainer/startPointContainer/HBoxContainer2/CenterContainer"]
-custom_minimum_size = Vector2(100, 2.08165e-12)
+custom_minimum_size = Vector2(50, 2.08165e-12)
 layout_mode = 2
 max_value = 240.0
 
@@ -115,7 +118,6 @@ theme_override_constants/separation = 15
 [node name="xLabel" type="Label" parent="HBoxContainer/endPointContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0, 0, 1)
-theme_override_font_sizes/font_size = 25
 text = "x"
 vertical_alignment = 1
 
@@ -125,12 +127,13 @@ theme_override_font_sizes/font_size = 18
 placeholder_text = "15"
 alignment = 1
 max_length = 3
+select_all_on_focus = true
 
 [node name="CenterContainer" type="CenterContainer" parent="HBoxContainer/endPointContainer/HBoxContainer"]
 layout_mode = 2
 
 [node name="endPointXSlider" type="HSlider" parent="HBoxContainer/endPointContainer/HBoxContainer/CenterContainer"]
-custom_minimum_size = Vector2(100, 2.08165e-12)
+custom_minimum_size = Vector2(50, 2.08165e-12)
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 400.0
@@ -142,7 +145,6 @@ theme_override_constants/separation = 15
 [node name="yLabel" type="Label" parent="HBoxContainer/endPointContainer/HBoxContainer2"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 1, 0, 1)
-theme_override_font_sizes/font_size = 25
 text = "y"
 vertical_alignment = 1
 
@@ -152,19 +154,21 @@ theme_override_font_sizes/font_size = 18
 placeholder_text = "15"
 alignment = 1
 max_length = 3
+select_all_on_focus = true
 
 [node name="CenterContainer" type="CenterContainer" parent="HBoxContainer/endPointContainer/HBoxContainer2"]
 layout_mode = 2
 
 [node name="endPointYSlider" type="HSlider" parent="HBoxContainer/endPointContainer/HBoxContainer2/CenterContainer"]
-custom_minimum_size = Vector2(100, 2.08165e-12)
+custom_minimum_size = Vector2(50, 2.08165e-12)
 layout_mode = 2
 max_value = 240.0
 
 [node name="xButton" type="Button" parent="HBoxContainer"]
-custom_minimum_size = Vector2(40, 40)
+custom_minimum_size = Vector2(15, 2.08165e-12)
 layout_mode = 2
 size_flags_vertical = 4
+theme_override_font_sizes/font_size = 11
 text = "X"
 
 [connection signal="text_submitted" from="HBoxContainer/startPointContainer/HBoxContainer/startPointXEdit" to="." method="setStartPointX"]
