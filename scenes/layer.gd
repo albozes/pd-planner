@@ -15,6 +15,7 @@ var sliderLength : int = 100
 
 signal posSet
 signal delete
+signal export
 
 func ready():
 	var sliders = [xPosSlider,yPosSlider]
@@ -77,3 +78,6 @@ func setYPos(input):
 func _on_x_button_pressed():
 	delete.emit(ID)
 	self.queue_free()
+
+func _on_export_button_pressed():
+	export.emit(self)

@@ -30,7 +30,7 @@ theme_override_fonts/font = ExtResource("1_nie4q")
 theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_pmorh")
 theme_override_styles/focus = SubResource("StyleBoxFlat_ryk2o")
-text = "Lorem Ipsum dolor sit amet."
+placeholder_text = "Lorem Ipsum dolor sit amet."
 wrap_mode = 1
 scroll_fit_content_height = true
 

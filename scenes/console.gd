@@ -30,3 +30,22 @@ func moveLayer(id,x,y):
 func delete(id):
 	print("Console: attempting deletion of " + str(id))
 	$screen.delete(id)
+
+func showGrids(index : int):
+	var grids = get_tree().get_nodes_in_group("grids")
+	for g in grids:
+		g.hide()
+	match index:
+		0:
+			pass
+		1:
+			$screen.ThreeGrid.show()
+		2:
+			$screen.FourGrid.show()
+
+func darkBG(toggled : bool):
+	match toggled:
+		true:
+			$screen.darkBG.show()
+		false:
+			$screen.darkBG.hide()

@@ -3,10 +3,14 @@ extends Control
 @onready var root = get_tree().get_root()
 @onready var console = $HBoxContainer/CenterContainer/console
 @onready var toolBox = $HBoxContainer/toolBox
-@onready var frameToggle = $HBoxContainer/toolBox/MarginContainer/VBoxContainer/HBoxContainer4/frameToggle
-@onready var crosshairToggle = $HBoxContainer/toolBox/MarginContainer/VBoxContainer/HBoxContainer4/crosshairToggle
+@onready var frameToggle = $HBoxContainer/toolBox/MarginContainer/VBoxContainer/HBoxContainer4/VBoxContainer/HBoxContainer/frameToggle
+@onready var crosshairToggle = $HBoxContainer/toolBox/MarginContainer/VBoxContainer/HBoxContainer4/VBoxContainer/HBoxContainer/crosshairToggle
+@onready var darkBGToggle = $HBoxContainer/toolBox/MarginContainer/VBoxContainer/HBoxContainer4/VBoxContainer/HBoxContainer2/darkBGButton
 @onready var cursorPosLabel = $HBoxContainer/toolBox/MarginContainer/VBoxContainer/HBoxContainer/cursorPosLabel
 @onready var lineWidthSlider = $HBoxContainer/toolBox/MarginContainer/VBoxContainer/HBoxContainer4/CrosshairWidth/lineWidthSlider
+
+@onready var codeWindow = $CodeWindow
+@onready var codeWindowText = $CodeWindow/TextEdit
 
 @onready var layerContainer = $HBoxContainer/toolBox/MarginContainer/VBoxContainer/ScrollContainer/layerContainer
 
@@ -15,6 +19,7 @@ var lineScene = preload("res://scenes/lineLayer.tscn")
 var textScene = preload("res://scenes/textLayer.tscn")
 
 var crosshairToggled : bool
+var darkBGToggled : bool
 
 var cursorPos : Vector2
 
@@ -25,6 +30,8 @@ var layerNumber : int = 0
 
 func _ready():
 	crosshairToggled = crosshairToggle.button_pressed
+	darkBGToggled = darkBGToggle.button_pressed
+	_on_dark_bg_button_toggled(darkBGToggled)
 	for n in get_tree().get_nodes_in_group("demo"):
 		n.queue_free()
 	$FileDialog.hide()
@@ -114,11 +121,13 @@ func filesDropped(files):
 			var newLayer = layerScene.instantiate()
 			layerContainer.add_child(newLayer)
 			layerContainer.move_child(newLayer,layerContainer.get_child_count()-1)
+			newLayer.add_to_group("spriteLayers")
 			newLayer.set_fileName(file.get_file())
 			newLayer.setXPos(loadPos.x)
 			newLayer.setYPos(loadPos.y)
 			newLayer.set_ID(layerNumber)
 			newLayer.posSet.connect(moveLayer)
+			newLayer.export.connect(generateCode)
 			newLayer.delete.connect(delete)
 		else:
 			print("Error. Not a valid PNG, JPG or JPEG.")
@@ -166,12 +175,14 @@ func createLine():
 	layerNumber += 1
 	console.createLine(layerNumber,Vector2(0,120),Vector2(400,120))
 	var newLine = lineScene.instantiate()
+	newLine.add_to_group("lineLayers")
 	layerContainer.add_child(newLine)
 	layerContainer.move_child(newLine,layerContainer.get_child_count()-1)
 	newLine.set_ID(layerNumber)
 	newLine.setStartPoint(Vector2(0,120))
 	newLine.setEndPoint(Vector2(400,120))
 	newLine.linePointSet.connect(moveLine)
+	newLine.export.connect(generateCode)
 	newLine.delete.connect(delete)
 
 func _on_add_sprites_button_pressed():
@@ -179,14 +190,16 @@ func _on_add_sprites_button_pressed():
 
 func createText():
 	layerNumber += 1
-	var startPos = Vector2(20,120)
-	console.createText(layerNumber,startPos,"Lorem ipsum dolor sit amet.")
+	var startPos = Vector2(20,15)
+	console.createText(layerNumber,startPos,"")
 	var newText = textScene.instantiate()
+	newText.add_to_group("textLayers")
 	layerContainer.add_child(newText)
 	layerContainer.move_child(newText,layerContainer.get_child_count()-1)
 	newText.set_ID(layerNumber)
 	newText.setPos(startPos)
 	newText.posSet.connect(moveLayer)
+	newText.export.connect(generateCode)
 	newText.delete.connect(delete)
 
 func _on_crosshair_toggle_toggled(toggled_on):
@@ -196,3 +209,46 @@ func _on_crosshair_toggle_toggled(toggled_on):
 			crosshair.show()
 		false:
 			crosshair.hide()
+
+func generateCode(elements):
+	var code = ""
+	for e in elements:
+		if e.is_in_group("spriteLayers"):
+			var pos
+			for s in get_tree().get_nodes_in_group("sprites"):
+				if s.get("ID") == e.ID:
+					pos = s.position
+			var fileName = e.fileName
+			code += "local " + fileName.get_basename() + "Image = gfx.image.new(\"images/" + fileName + "\")"
+			code += "\n" + fileName.get_basename() + "Sprite  = gfx.sprite.new(" + fileName.get_basename() + "Image)"
+			code += "\n" + fileName.get_basename() + "Sprite:moveTo(" + str(pos.x) + "," + str(pos.y) + ")"
+			print(code)
+			code += "\n" + fileName.get_basename() + "Sprite:add()\n\n"
+			
+		if e.is_in_group("lineLayers"):
+			code += "gfx.drawLine(" + str(e.startPoint.x) + "," + str(e.startPoint.y) + "," + str(e.endPoint.x) + "," + str(e.endPoint.y) + ")\n\n"
+			
+		if e.is_in_group("textLayers"):
+			var text
+			for t in get_tree().get_nodes_in_group("texts"):
+				if t.get("ID") == e.ID:
+					text = t.content
+			text = text.replace("\\", "\\\\")
+			text = text.replace("\n", "\\n")
+			code += "gfx.drawText(\"" + text + "\"," + str(e.xPos) + "," + str(e.xPos) + ")\n\n"
+	codeWindowText.text = code
+	codeWindow.popup_centered()
+
+func _on_code_window_close_requested():
+	codeWindow.hide()
+
+func _on_export_all_button_pressed():
+	generateCode(layerContainer.get_children())
+
+
+func _on_grid_selector_item_selected(index):
+	console.showGrids(index)
+
+func _on_dark_bg_button_toggled(toggled_on):
+	darkBGToggled = toggled_on
+	console.darkBG(toggled_on)

@@ -19,6 +19,7 @@ var sliderLength : int = 50
 
 signal linePointSet
 signal delete
+signal export
 
 func ready():
 	var sliders = [startPointXSlider, startPointYSlider, endPointXSlider, endPointYSlider]
@@ -72,3 +73,6 @@ func setEndPoint(input : Vector2):
 func _on_x_button_pressed():
 	delete.emit(ID)
 	self.queue_free()
+
+func _on_export_button_pressed():
+	export.emit(self)

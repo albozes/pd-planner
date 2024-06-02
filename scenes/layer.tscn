@@ -11,11 +11,10 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_bottom = -1020.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
-size_flags_vertical = 3
+size_flags_vertical = 4
 theme = ExtResource("1_c5ye8")
 script = ExtResource("1_5s3xu")
 
@@ -28,10 +27,16 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 20
 
-[node name="fileNameLabel" type="Label" parent="HBoxContainer"]
-custom_minimum_size = Vector2(125, 80)
+[node name="HSeparator" type="HSeparator" parent="HBoxContainer"]
+custom_minimum_size = Vector2(5, 2.08165e-12)
 layout_mode = 2
-theme_override_font_sizes/font_size = 18
+size_flags_horizontal = 0
+
+[node name="fileNameLabel" type="Label" parent="HBoxContainer"]
+custom_minimum_size = Vector2(105, 80)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 14
 text = "filename.png"
 vertical_alignment = 1
 autowrap_mode = 1
@@ -52,13 +57,12 @@ theme_override_constants/separation = 15
 [node name="xLabel" type="Label" parent="HBoxContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0, 0, 1)
-theme_override_font_sizes/font_size = 25
 text = "x"
 vertical_alignment = 1
 
 [node name="xPosEdit" type="LineEdit" parent="HBoxContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 18
+theme_override_font_sizes/font_size = 10
 placeholder_text = "15"
 alignment = 1
 max_length = 3
@@ -80,13 +84,12 @@ theme_override_constants/separation = 15
 [node name="yLabel" type="Label" parent="HBoxContainer/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 1, 0, 1)
-theme_override_font_sizes/font_size = 25
 text = "y"
 vertical_alignment = 1
 
 [node name="yPosEdit" type="LineEdit" parent="HBoxContainer/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 18
+theme_override_font_sizes/font_size = 10
 placeholder_text = "15"
 alignment = 1
 max_length = 3
@@ -100,6 +103,14 @@ custom_minimum_size = Vector2(100, 2.08165e-12)
 layout_mode = 2
 max_value = 240.0
 
+[node name="exportButton" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(15, 2.08165e-12)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 11
+text = "Export"
+icon = SubResource("ViewportTexture_kb56n")
+
 [node name="xButton" type="Button" parent="HBoxContainer"]
 custom_minimum_size = Vector2(15, 2.08165e-12)
 layout_mode = 2
@@ -112,4 +123,5 @@ icon = SubResource("ViewportTexture_kb56n")
 [connection signal="value_changed" from="HBoxContainer/VBoxContainer/HBoxContainer/CenterContainer/xPosSlider" to="." method="setXPos"]
 [connection signal="text_submitted" from="HBoxContainer/VBoxContainer/HBoxContainer2/yPosEdit" to="." method="setYPos"]
 [connection signal="value_changed" from="HBoxContainer/VBoxContainer/HBoxContainer2/CenterContainer/yPosSlider" to="." method="setYPos"]
+[connection signal="pressed" from="HBoxContainer/exportButton" to="." method="_on_export_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/xButton" to="." method="_on_x_button_pressed"]

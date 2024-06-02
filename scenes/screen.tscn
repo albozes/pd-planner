@@ -21,7 +21,7 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_tyyul")
 
-[node name="BGRect" type="ColorRect" parent="."]
+[node name="LightBG" type="ColorRect" parent="."]
 clip_children = 2
 custom_minimum_size = Vector2(400, 240)
 layout_mode = 1
@@ -30,6 +30,16 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="DarkBG" type="ColorRect" parent="LightBG"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
 
 [node name="DemoSprite2D" parent="." instance=ExtResource("2_vkdn1")]
 visible = false
@@ -52,3 +62,70 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+
+[node name="ThreeGrid" type="Control" parent="." groups=["grids"]]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Line2D" type="Line2D" parent="ThreeGrid"]
+points = PackedVector2Array(133.3, 2.08165e-12, 133.3, 240)
+width = 1.0
+default_color = Color(1, 0.768627, 0.176471, 1)
+
+[node name="Line2D2" type="Line2D" parent="ThreeGrid"]
+points = PackedVector2Array(266.6, 2.08165e-12, 266.6, 240)
+width = 1.0
+default_color = Color(1, 0.768627, 0.176471, 1)
+
+[node name="Line2D3" type="Line2D" parent="ThreeGrid"]
+points = PackedVector2Array(2.08165e-12, 80, 400, 80)
+width = 1.0
+default_color = Color(1, 0.768627, 0.176471, 1)
+
+[node name="Line2D4" type="Line2D" parent="ThreeGrid"]
+points = PackedVector2Array(2.08165e-12, 160, 400, 160)
+width = 1.0
+default_color = Color(1, 0.768627, 0.176471, 1)
+
+[node name="FourGrid" type="Control" parent="." groups=["grids"]]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Line2D" type="Line2D" parent="FourGrid"]
+points = PackedVector2Array(100, 2.08165e-12, 100, 240)
+width = 1.0
+default_color = Color(1, 0.768627, 0.176471, 1)
+
+[node name="Line2D2" type="Line2D" parent="FourGrid"]
+points = PackedVector2Array(200, 2.08165e-12, 200, 240)
+width = 1.0
+default_color = Color(1, 0.768627, 0.176471, 1)
+
+[node name="Line2D5" type="Line2D" parent="FourGrid"]
+points = PackedVector2Array(300, 2.08165e-12, 300, 240)
+width = 1.0
+default_color = Color(1, 0.768627, 0.176471, 1)
+
+[node name="Line2D3" type="Line2D" parent="FourGrid"]
+points = PackedVector2Array(2.08165e-12, 60, 400, 60)
+width = 1.0
+default_color = Color(1, 0.768627, 0.176471, 1)
+
+[node name="Line2D4" type="Line2D" parent="FourGrid"]
+points = PackedVector2Array(2.08165e-12, 120, 400, 120)
+width = 1.0
+default_color = Color(1, 0.768627, 0.176471, 1)
+
+[node name="Line2D6" type="Line2D" parent="FourGrid"]
+points = PackedVector2Array(2.08165e-12, 180, 400, 180)
+width = 1.0
+default_color = Color(1, 0.768627, 0.176471, 1)
+
+[connection signal="focus_entered" from="." to="." method="_on_focus_entered"]
+[connection signal="gui_input" from="LightBG" to="." method="_on_bg_rect_gui_input"]

@@ -4,6 +4,13 @@ var sprite = preload("res://scenes/sprite.tscn")
 var line = preload("res://scenes/line.tscn")
 var text = preload("res://scenes/text.tscn")
 
+@onready var ThreeGrid = $ThreeGrid
+@onready var FourGrid = $FourGrid
+@onready var darkBG = $LightBG/DarkBG
+
+func ready():
+	grab_focus()
+
 func loadSprite(file,pos : Vector2, id : int):
 	var image = Image.load_from_file(file)
 	var texture = ImageTexture.create_from_image(image)
@@ -18,11 +25,11 @@ func loadSprite(file,pos : Vector2, id : int):
 		# Add the sprite to the scene
 		add_child(newSprite)
 		move_child(newSprite,get_child_count() - 2)
-		newSprite.add_to_group("layers")
+		newSprite.add_to_group("sprites")
 		newSprite.position = pos
 
 func moveLayer(id,x,y):
-	for c in get_tree().get_nodes_in_group("layers") + get_tree().get_nodes_in_group("texts"):
+	for c in get_tree().get_nodes_in_group("sprites") + get_tree().get_nodes_in_group("texts"):
 		print("Screen: searching for ID " + str(id))
 		print(c.ID)
 		if c.ID == id:
@@ -57,6 +64,7 @@ func createText(id : int, pos : Vector2, input : String):
 	newText.set_Pos(pos)
 	newText.ID = id
 	move_child(newText,get_child_count() - 2)
+	newText.enterTextEdit()
 
 func delete(id):
 	print("Screen: attempting deletion of " + str(id))
@@ -65,3 +73,10 @@ func delete(id):
 			print(c.ID)
 			print("Screen: deleting " + str(id))
 			c.queue_free()
+
+func _on_bg_rect_gui_input(event):
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+			print("Clicked BG")
+			hide()
+			show()
