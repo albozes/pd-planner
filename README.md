@@ -16,7 +16,8 @@ There is currently no standalone build because I'm too early in development, so 
 Other than [Godot 4](https://godotengine.org/), this project has no requirements. If the Godot Engine runs on your computer, so will PD Planner!
 
 Simply git clone this repo.
-    ```bash
+
+    ```
     git clone [path/to/offerman.py](https://github.com/albozes/pd-planner/tree/main)
     ```
 Then open it the same way you would any Godot project.
