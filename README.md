@@ -1,7 +1,7 @@
 # PD Planner
 
 **Version:** 0.1 Alpha  
-**Release Date:** May 31, 2024  
+**Release Date:** June 5th, 2024  
 **Author:** Albert Bozesan
 
 ---
