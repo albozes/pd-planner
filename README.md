@@ -17,9 +17,8 @@ Other than [Godot 4](https://godotengine.org/), this project has no requirements
 
 Simply git clone this repo.
 
-    ```
     git clone [path/to/offerman.py](https://github.com/albozes/pd-planner/tree/main)
-    ```
+
 Then open it the same way you would any Godot project.
 
 ## License
