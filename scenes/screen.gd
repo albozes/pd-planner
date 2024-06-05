@@ -24,7 +24,7 @@ func loadSprite(file,pos : Vector2, id : int):
 		
 		# Add the sprite to the scene
 		add_child(newSprite)
-		move_child(newSprite,get_child_count() - 2)
+		move_child(newSprite,get_child_count() - 4)
 		newSprite.add_to_group("sprites")
 		newSprite.position = pos
 
@@ -45,7 +45,7 @@ func createLine(id : int, startPoint : Vector2, endPoint: Vector2):
 	newLine.default_color = Color("BLACK")
 	newLine.ID = id
 	add_child(newLine)
-	move_child(newLine,get_child_count() - 2)
+	move_child(newLine,get_child_count() - 4)
 
 func moveLine(id,startPoint,endPoint):
 	for c in get_tree().get_nodes_in_group("lines"):
@@ -63,7 +63,7 @@ func createText(id : int, pos : Vector2, input : String):
 	newText.set_Text(input)
 	newText.set_Pos(pos)
 	newText.ID = id
-	move_child(newText,get_child_count() - 2)
+	move_child(newText,get_child_count() - 4)
 	newText.enterTextEdit()
 
 func delete(id):
