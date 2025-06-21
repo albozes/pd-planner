@@ -4,11 +4,13 @@ const imageLoader = document.getElementById('imageLoader');
 const gridToggle = document.getElementById('gridToggle');
 const bgToggle = document.getElementById('bgToggle');
 const lineBtn = document.getElementById('lineBtn');
+const addTextBtn = document.getElementById('addTextBtn');
 const lineWidth = document.getElementById('lineWidth');
 const cursorPos = document.getElementById('cursorPos');
 
 let drawingLine = false;
 let lineStart = null;
+let addingText = false;
 
 function drawGrid() {
     if (gridToggle.checked) {
@@ -88,6 +90,11 @@ lineBtn.addEventListener('click', () => {
     lineStart = null;
 });
 
+addTextBtn.addEventListener('click', () => {
+    addingText = !addingText;
+    addTextBtn.textContent = addingText ? 'Finish Text' : 'Add Text';
+});
+
 canvas.addEventListener('mousedown', e => {
     const rect = canvas.getBoundingClientRect();
     const x = Math.floor(e.clientX - rect.left);
@@ -102,12 +109,14 @@ canvas.addEventListener('mousedown', e => {
             lineStart = null;
             draw();
         }
-    } else {
+    } else if (addingText) {
         const text = prompt('Enter text');
         if (text) {
             elements.push(new TextElement(text, x, y));
             draw();
         }
+        addingText = false;
+        addTextBtn.textContent = 'Add Text';
     }
 });
 

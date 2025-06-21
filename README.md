@@ -4,7 +4,8 @@ A simple offline web app for planning Playdate scenes. Open `index.html` in your
 
 ## Features
 - 400x240 canvas representing the Playdate screen
-- Add images, text, and lines
+- Add images with the file picker
+- Use the **Add Text** and **Draw Line** buttons to place text and lines
 - Toggle grid overlay and dark background
 - Adjust line width
 
