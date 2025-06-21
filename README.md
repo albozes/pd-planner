@@ -1,26 +1,11 @@
-# PD Planner
+# PD Planner Web
 
-**Version:** 0.1 Alpha  
-**Release Date:** June 5th, 2024  
-**Author:** Albert Bozesan
+A simple offline web app for planning Playdate scenes. Open `index.html` in your browser to run locally.
 
----
+## Features
+- 400x240 canvas representing the Playdate screen
+- Add images, text, and lines
+- Toggle grid overlay and dark background
+- Adjust line width
 
-## Introduction
-
-A simple app to plan out scenes for the Playdate retro-style game console on a precision pixel level. It's being built using the Open Source Godot Engine, which has powerful UI capabilities and is compatible with every major OS and platform.
-
-## Installing / Running PD Planner
-
-There is currently no standalone build because I'm too early in development, so you'll have to use it inside Godot.
-Other than [Godot 4](https://godotengine.org/), this project has no requirements. If the Godot Engine runs on your computer, so will PD Planner!
-
-Simply git clone this repo.
-
-    git clone https://github.com/albozes/pd-planner/
-
-Then open it the same way you would any Godot project.
-
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
+This project replaces the original Godot-based version.
