@@ -1,0 +1,25 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #f0f0f0;
+    margin: 0;
+    padding: 1rem;
+}
+
+#toolbar {
+    margin-bottom: 0.5rem;
+}
+
+canvas {
+    border: 1px solid #000;
+    image-rendering: pixelated;
+}
+
+.dark {
+    background: #333;
+}
+
+.grid canvas {
+    background-size: 10px 10px;
+    background-image: linear-gradient(90deg, rgba(0,0,0,0.1) 1px, transparent 1px),
+                      linear-gradient(180deg, rgba(0,0,0,0.1) 1px, transparent 1px);
+}
